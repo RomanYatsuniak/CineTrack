@@ -1,0 +1,27 @@
+import 'react-native-url-polyfill/auto';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createClient, processLock, SupabaseClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Missing Supabase URL or Anon Key. Check your .env file.');
+}
+
+let supabaseClient: SupabaseClient;
+
+export function getSupabase(): SupabaseClient {
+    if (!supabaseClient && supabaseUrl !== undefined && supabaseAnonKey !== undefined) {
+        supabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
+            auth: {
+                storage: AsyncStorage,
+                autoRefreshToken: true,
+                persistSession: true,
+                detectSessionInUrl: false,
+                lock: processLock,
+            },
+        });
+    }
+    return supabaseClient;
+}

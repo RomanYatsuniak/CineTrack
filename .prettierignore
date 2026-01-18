@@ -1,0 +1,41 @@
+# Expo
+.expo/
+.expo-shared/
+web-build/
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Native builds
+android/
+ios/
+*.apk
+*.ipa
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+
+# Cache
+.cache/
+*.tsbuildinfo
+.eslintcache
+
+# Misc
+.DS_Store
+*.log
+.git/
+.env*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Metro
+.metro-health-check*

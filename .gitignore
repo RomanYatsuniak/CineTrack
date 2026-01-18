@@ -2,7 +2,9 @@
 
 # dependencies
 node_modules/
-
+.env
+.idea/
+.vscode/
 # Expo
 .expo/
 dist/
