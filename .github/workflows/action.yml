@@ -18,3 +18,9 @@ jobs:
         run: npm ci
       - name: run tests
         run: npm test
+  second-job:
+    needs: first-job
+    runs-on: macos-14
+    steps:
+      - name: test2
+        run: echo "test2"
