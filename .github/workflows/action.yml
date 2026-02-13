@@ -8,3 +8,13 @@ jobs:
         run: echo "test"
       - name: done
         run: echo "done"
+      - name: test
+        uses: actions/checkout
+      - name: install Node
+        uses: actions/setup-node
+        with:
+          node-verison: 18
+      - name: install dependdencies
+        run: npm ci
+      - name: run tests
+        run: npm test
