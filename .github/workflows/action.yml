@@ -5,7 +5,7 @@ on:
 
 jobs: 
   first-job:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -29,7 +29,7 @@ jobs:
 
   second-job:
     needs: first-job
-    runs-on: macos-14
+    runs-on: ubuntu-latest
     steps:
       - name: test2
         run: echo "test2"
