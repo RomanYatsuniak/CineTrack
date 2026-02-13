@@ -1,23 +1,32 @@
 name: workflow
-on: workflow_dispatch
+
+on:
+  workflow_dispatch:
+
 jobs: 
   first-job:
     runs-on: ubuntu-20.04
     steps:
-      - name: print
-        run: echo "test"
-      - name: done
-        run: echo "done"
-      - name: test
+      - name: Checkout code
         uses: actions/checkout@v3
-      - name: install Node
+
+      - name: Print
+        run: echo "test"
+
+      - name: Done
+        run: echo "done"
+
+      - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-verison: 18
-      - name: install dependdencies
+          node-version: 18
+
+      - name: Install dependencies
         run: npm ci
-      - name: run tests
+
+      - name: Run tests
         run: npm test
+
   second-job:
     needs: first-job
     runs-on: macos-14
