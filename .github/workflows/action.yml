@@ -11,8 +11,14 @@ on:
       - 'dev-*'
     paths-ignore:
       - '.github/workflows/*'
+env:
+  MONGO_DB_NAME: gha-demo
 jobs: 
   first-job:
+    environment: testing
+    env:
+      TEST: cluster
+      TEST_SECRET: ${{secrets.GITHUB_TOKEN}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -33,7 +39,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: npm test $TEST 'MONGO ${{env.TEST}}'
 
   second-job:
     needs: first-job
