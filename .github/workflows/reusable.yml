@@ -1,8 +1,19 @@
 name: reusable
-on: workflow_call
+on: 
+  workflow_call:
+    inputs:
+      artifact-name: 
+        description: test
+        required: false
+        default: dist
+        type: string
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: test
         run: echo "info"
+      - name: Get code
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{inputs.artifact-name}}
