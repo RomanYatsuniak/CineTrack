@@ -6,6 +6,10 @@ jobs:
     strategy:
       matrix:
         node-version: [12,13,14]
+        include: 
+          - node-version: 18
+        exclude:
+          - node-version: 12
     runs-on: ubuntu-latest
     steps:
       - name: GetCOde
