@@ -23,27 +23,33 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Print
         run: echo "test"
-
       - name: Done
         run: echo "done"
-
       - name: Install Node
+        id: install-node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-
       - name: Install dependencies
+        if: failure() && steps.install-node.outcome == 'failure'
         run: npm ci
-
       - name: Run tests
+        continue-on-error: true
         run: npm test $TEST 'MONGO ${{env.TEST}}'
-
   second-job:
     needs: first-job
     runs-on: ubuntu-latest
     steps:
       - name: test2
         run: echo "test2"
+  report:
+    needs: [first-job, second-job]
+    if: failure()
+    runs-on: ubuntu-latest'
+    steps:
+    - name: output
+      run: |
+        echo "Something went wrong"
+        echo "${{toJson(github)}}"
