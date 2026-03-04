@@ -16,6 +16,8 @@ env:
 jobs: 
   deploy:
     uses: ./.github/workflows/reusable.yml
+    with:
+      artifact-name: dist-files
   first-job:
     environment: testing
     env:
