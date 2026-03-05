@@ -14,6 +14,10 @@ on:
 env:
   MONGO_DB_NAME: gha-demo
 jobs: 
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: node:22
   deploy:
     uses: ./.github/workflows/reusable.yml
     with:
