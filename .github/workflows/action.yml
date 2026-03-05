@@ -12,8 +12,8 @@ on:
     paths-ignore:
       - '.github/workflows/*'
 env:
-  MONGO_DB_NAME: gha-demo
-jobs: 
+  MONGO_DB_NAME: gha-demo  
+jobs:
   test:
     runs-on: ubuntu-latest
     container:
@@ -27,6 +27,14 @@ jobs:
   print-deploy-result:
     needs: deploy
     runs-on: ubuntu-latest
+    services:
+      mongodb: 
+        image: mongo
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INIT: root
+          MONGO_PASS: example
     steps:
       - name: Print deploy output
         run: echo "${{needs.deploy.outputs.result}}"
